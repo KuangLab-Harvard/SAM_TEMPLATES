@@ -12,7 +12,7 @@
 #SBATCH -t 2-00:00 # time (D-HH:MM)
 
 #SBATCH -J "SAM_run"
-#SBATCH --mail-user=
+#SBATCH --mail-user=[email]
 #SBATCH --mail-type=ALL
 #SBATCH -o ./LOGS/samrun.%j.out # STDOUT
 #SBATCH -e ./LOGS/samrun.%j.err # STDERR
@@ -21,12 +21,12 @@ module purge
 module load intel/19.0.5-fasrc01 impi/2019.5.281-fasrc01 netcdf/4.1.3-fasrc02
 
 case=RCE
-project=
-experiment=
-config=
-sndname=
-lsfname=noforcing
-ensemblemember=member00
+project=[project]
+experiment=[experiment]
+config=[config]
+sndname=[sndname]
+lsfname=[lsfname]
+ensemblemember=member[xx]
 
 exproot=/n/holyscratch01/kuang_lab/nwong/$project/exp
 prmfile=$exproot/prm/$experiment/$config/${ensemblemember}.prm
