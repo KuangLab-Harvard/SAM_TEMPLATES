@@ -14,11 +14,11 @@ C. Run the Makefile in `SAM/UTIL`
 
 In the file `Build.csh`, you need to set the variables `SAM_SCR` and `SAM_SRC` in the following lines:
 Line 7:  `setenv SAM_SCR (point_to_your_data_directory_preferably_on_scratch)`
-Line 46: `setenv SAM_SRC (point_to_the_SRC_dir_for_v6.10)`
+Line 46: `setenv SAM_SRC (point_to_the_SRC_dir_for_v6.11)`
 
 As you can probably guess from the above:
 * `SAM_SCR` is the scratch directory where your data (`OUT_*`) will be saved into
-* `SAM_SRC` is the `SRC` directory containing the model codes for SAM v6.10(UW)
+* `SAM_SRC` is the `SRC` directory containing the model codes for SAM v6.11
 
 ## 2. Run `Build`
 
