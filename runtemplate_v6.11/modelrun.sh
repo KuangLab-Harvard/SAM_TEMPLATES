@@ -18,7 +18,7 @@
 #SBATCH -e ./LOGS/samrun.%j.err # STDERR
 
 module purge
-module load intel/19.0.5-fasrc01 impi/2019.5.281-fasrc01 netcdf/4.1.3-fasrc02
+module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-c/4.9.2-fasrc01
 
 case=RCE
 project=[project]
