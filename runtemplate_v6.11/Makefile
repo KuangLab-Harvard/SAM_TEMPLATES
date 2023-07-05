@@ -24,7 +24,7 @@ PLATFORM := $(shell uname -s)
 ifeq ($(PLATFORM),Linux)
 
 MPIF90 = mpiifort
-FF77 = ${MPIF90} -c -fixed -extend_source -r8
+FF77 = ${MPIF90} -c -fixed -extend-source -r8
 FF90 = ${MPIF90} -c -r8
 CC = mpicc -c -DLINUX
 

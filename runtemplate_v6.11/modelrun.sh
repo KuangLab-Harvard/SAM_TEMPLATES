@@ -3,12 +3,12 @@
 ##SBATCH -p test         # short jobs, time limit 8 hours
 ##SBATCH -p huce_intel   # cheap, slower, no time limit
 #SBATCH -p huce_cascade # expensive, faster, no time limit
+##SBATCH -p huce_ice     # more expensive, much faster, no time limit
 ##SBATCH -p shared       # longer jobs, 7 days, use only when needed
 
 #SBATCH -N 2 # number of nodes
 #SBATCH -n 64 # number of cores
-#SBATCH --mem-per-cpu=2GB # memory pool for each core
-#SBATCH --hint=compute_bound
+#SBATCH --mem-per-cpu=500 # memory pool for each core
 #SBATCH -t 1-00:00 # time (D-HH:MM)
 
 #SBATCH -J "SAM_run"
@@ -18,9 +18,7 @@
 #SBATCH -e ./LOGS/samrun.%j.err # STDERR
 
 module purge
-module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01
-module load netcdf-fortran/4.6.0-fasrc03
-module load netcdf-c/4.9.2-fasrc02
+module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-fasrc03
 
 case=RCE
 project=[project]

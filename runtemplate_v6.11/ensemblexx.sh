@@ -3,12 +3,12 @@
 ##SBATCH -p test         # short jobs, time limit 8 hours
 ##SBATCH -p huce_intel   # cheap, slower, no time limit
 #SBATCH -p huce_cascade # expensive, faster, no time limit
+##SBATCH -p huce_ice     # more expensive, much faster, no time limit
 ##SBATCH -p shared       # longer jobs, 7 days, use only when needed
 
-#SBATCH -N 1 # number of nodes
-#SBATCH -n 32 # number of cores
-#SBATCH --mem-per-cpu=3GB # memory pool for each core
-#SBATCH --hint=compute_bound
+#SBATCH -N 2 # number of nodes
+#SBATCH -n 64 # number of cores
+#SBATCH --mem-per-cpu=500 # memory pool for each core
 #SBATCH -t 2-00:00 # time (D-HH:MM)
 
 #SBATCH -J "SAM_run"
@@ -18,9 +18,7 @@
 #SBATCH -e ./LOGS/samrun.%j.err # STDERR
 
 module purge
-module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01
-module load netcdf-fortran/4.6.0-fasrc03
-module load netcdf-c/4.9.2-fasrc02
+module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-fasrc03
 
 case=RCE
 project=[project]
@@ -49,21 +47,21 @@ echo $case > CaseName
 
 cd ./OUT_3D
 
-for fbin3D in *$ensemblemember*.bin3D
+for fcom3D in *$ensemblemember*.com3D
 do
-    rm "$fbin3D"
+    rm "$fcom3D"
 done
 
-for fbin2D in *$ensemblemember*.bin2D
+for fcom2D in *$ensemblemember*.com2D
 do
-    rm "$fbin2D"
+    rm "$fcom2D"
 done
 
 cd ../OUT_2D
 
-for f2Dbin in *$ensemblemember*.2Dbin
+for f2Dcom in *$ensemblemember*.2Dcom
 do
-    rm "$f2Dbin"
+    rm "$f2Dcom"
 done
 
 cd ../OUT_STAT
@@ -84,38 +82,38 @@ echo SAM stopped with exit status $exitstatus
 
 cd ./OUT_3D
 
-for fbin3D in *$ensemblemember*.bin3D
+for fcom3D in *$ensemblemember*.com3D
 do
-    if bin3D2nc "$fbin3D" >& /dev/null
+    if com3D2nc "$fbin3D" >& /dev/null
     then
-        echo "Processing SAM bin3D output file $fbin3D ... done"
-        rm "$fbin3D"
+        echo "Processing SAM com3D output file $fcom3D ... done"
+        rm "$fcom3D"
     else
-        echo "Processing SAM bin3D output file $fbin3D ... failed"
+        echo "Processing SAM com3D output file $fcom3D ... failed"
     fi
 done
 
-for fbin2D in *$ensemblemember*.bin2D
+for fcom2D in *$ensemblemember*.com2D
 do
-    if bin2D2nc "$fbin2D" >& /dev/null
+    if com2D2nc "$fbin2D" >& /dev/null
     then
-        echo "Processing SAM bin2D output file $fbin2D ... done"
-        rm "$fbin2D"
+        echo "Processing SAM com2D output file $fcom2D ... done"
+        rm "$fcom2D"
     else
-        echo "Processing SAM bin2D output file $fbin2D ... failed"
+        echo "Processing SAM bin2D output file $fcom2D ... failed"
     fi
 done
 
 cd ../OUT_2D
 
-for f2Dbin in *$ensemblemember*.2Dbin
+for f2Dcom in *$ensemblemember*.2Dcom
 do
-    if 2Dbin2nc "$f2Dbin" >& /dev/null
+    if 2Dcom2nc "$f2Dcom" >& /dev/null
     then
-        echo "Processing SAM 2Dbin output file $f2Dbin ... done"
-        rm "$f2Dbin"
+        echo "Processing SAM 2Dcom output file $f2Dcom ... done"
+        rm "$f2Dcom"
     else
-        echo "Processing SAM 2Dbin output file $f2Dbin ... failed"
+        echo "Processing SAM 2Dcom output file $f2Dcom ... failed"
     fi
 done
 
