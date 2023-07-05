@@ -4,9 +4,10 @@
 echo Loading modules ... takes half a minute ...
 
 module purge
-module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-c/4.9.2-fasrc01
+module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-fasrc03
+
+export LD_LIBRARY_PATH=/n/sw/helmod-rocky8/apps/Core/mpfr/4.2.0-fasrc01/lib64:$LD_LIBRARY_PATH
 
 ./Build.csh >& Build.log &  #TODO
 echo Build submitted in background
 echo Writing logs in Build.log
-

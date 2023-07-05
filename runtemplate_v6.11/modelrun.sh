@@ -18,7 +18,9 @@
 #SBATCH -e ./LOGS/samrun.%j.err # STDERR
 
 module purge
-module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-c/4.9.2-fasrc01
+module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01
+module load netcdf-fortran/4.6.0-fasrc03
+module load netcdf-c/4.9.2-fasrc02
 
 case=RCE
 project=[project]
@@ -46,7 +48,7 @@ echo $case > CaseName
 
 cd $scriptdir 
 export OMPI_MCA_btl="self,openib"
-time srun -n $SLURM_NTASKS --mpi=pmi2 --cpu_bind=cores --hint=compute_bound $SAMname > ./LOGS/samrun.${SLURM_JOBID}.log
+mpirun -np $SLURM_NTASKS $SAMname > ./LOGS/samrun.${SLURM_JOBID}.log
 
 exitstatus=$?
 echo SAM stopped with exit status $exitstatus
