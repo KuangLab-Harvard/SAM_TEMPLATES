@@ -1,2 +1,6 @@
 /SRC*
 */.DS_Store
+.DS_Store
+*.pdf
+*.code*
+/RUNDATA*
