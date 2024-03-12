@@ -1,8 +1,8 @@
 #!/bin/sh 
 
 ##SBATCH -p test         # short jobs, time limit 8 hours
-##SBATCH -p huce_intel   # cheap, slower, no time limit
 #SBATCH -p huce_cascade # expensive, faster, no time limit
+##SBATCH -p huce_ice     # more expensive, much faster, no time limit
 ##SBATCH -p shared       # longer jobs, 7 days, use only when needed
 
 #SBATCH -N 1 # number of nodes
